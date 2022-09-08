@@ -6,7 +6,7 @@ ENV version=1.0
 LABEL name=techdocs-check version=$version \
     maintainer="Pavel Dedik <dedikx@gmail.com>"
 
-RUN apk add bash && \
+RUN apk add --no-cache bash && \
     pip install --no-cache mkdocs-techdocs-core==1.*
 
 WORKDIR /app
