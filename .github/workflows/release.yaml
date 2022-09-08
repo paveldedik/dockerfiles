@@ -14,6 +14,7 @@ jobs:
       matrix:
         image:
           - k8s-tools
+          - techdocs-check
 
     steps:
       - uses: actions/checkout@v2
