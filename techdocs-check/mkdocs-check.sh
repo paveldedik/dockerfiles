@@ -3,12 +3,18 @@
 working_dir="$PWD"
 
 for mkdocs in $(find . -name mkdocs.yaml 2>/dev/null); do
-  docsdir=$(dirname $mkdocs)
-  echo "running command 'mkdocs build $docsdir' ..."
+  docs_dir=$(dirname $mkdocs)
+  echo "running command 'mkdocs build $docs_dir' ..."
 
-  cd $(dirname $mkdocs)
+  if [ $docs_dir = "." ]; then
+    build_dir="/tmp/root"
+  else
+    build_dir="/tmp/$docs_dir"
+  fi
 
-  output=$(mkdocs build -d /tmp/$docsdir 2>&1)
+  cd $docs_dir
+
+  output=$(mkdocs build -d $build_dir 2>&1)
   errors=$(echo "$output" | grep ERROR)
 
   if [ -z "$errors" ]; then

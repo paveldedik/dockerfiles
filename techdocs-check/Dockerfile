@@ -1,6 +1,6 @@
 FROM python:3.10-alpine
 
-ENV version=1.0
+ENV version=1.1
 
 # Metadata
 LABEL name=techdocs-check version=$version \
