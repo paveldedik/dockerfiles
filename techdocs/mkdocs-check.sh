@@ -4,7 +4,8 @@ working_dir="$PWD"
 
 for mkdocs in $(find . -name mkdocs.yaml 2>/dev/null); do
   docs_dir=$(dirname $mkdocs)
-  echo "running command 'mkdocs build $docs_dir' ..."
+
+  echo "info: Running command 'mkdocs build $docs_dir' ..."
 
   if [ $docs_dir = "." ]; then
     build_dir="/tmp/root"
@@ -21,16 +22,16 @@ for mkdocs in $(find . -name mkdocs.yaml 2>/dev/null); do
     warnings=$(echo "$output" | grep WARNING)
 
     if [ -z "$warnings" ]; then
-        echo "build suceeded"
+        echo "info: Build suceeded"
     else
-        echo "build failed returning the following WARNINGS:"
+        echo "error: Build failed returning the following WARNINGs:"
         echo ""
         echo "$warnings"
         exit 1
     fi
 
   else
-    echo "build failed returning the following ERRORS:"
+    echo "error: Build failed returning the following ERRORs:"
     echo ""
     echo "$errors"
     exit 1
