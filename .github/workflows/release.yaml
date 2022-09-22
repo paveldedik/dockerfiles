@@ -36,20 +36,6 @@ jobs:
         if: ${{ steps.filter.outputs.definition == 'true' }}
         run: echo paveldedik/${{ matrix.image }}:${{ steps.metadata.outputs.version }}
 
-      - name: GitHub Package Registry
-        if: ${{ steps.filter.outputs.definition == 'true' }}
-        uses: aevea/action-kaniko@master
-        with:
-          registry: ghcr.io
-          password: ${{ secrets.GITHUB_TOKEN }}
-          image: ${{ matrix.image }}
-          cache: true
-          cache_registry: cache
-          tag: ${{ steps.metadata.outputs.version }}
-          tag_with_latest: true
-          extra_args: >
-            --context ${{ matrix.image }}
-            --dockerfile ${{ matrix.image }}/Dockerfile
       - name: Dockerhub
         if: ${{ steps.filter.outputs.definition == 'true' }}
         uses: aevea/action-kaniko@master
